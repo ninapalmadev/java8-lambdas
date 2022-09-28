@@ -3,6 +3,9 @@ package br.com.alura;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.OptionalDouble;
+import java.util.stream.Collectors;
 
 class Curso {
 	private String nome;
@@ -31,12 +34,36 @@ public class ExemploCurso {
 		cursos.add(new Curso("C", 55));
 
 		cursos.sort(Comparator.comparing(Curso::getAlunos));
+
+		OptionalDouble media = cursos.stream()
+				.filter(c -> c.getAlunos() >= 50)
+				.mapToInt(Curso::getAlunos) // pega a quantidade de
+				.average(); 
+
+		System.out.println(media);
+
+//		cursos.stream()
+//		.filter(c -> c.getAlunos() >= 100)
+//		.findAny()
+//		.ifPresent(c -> System.out.println(c.getNome()));
 		
-		int sum = cursos.stream()
-		.filter(c -> c.getAlunos() >= 100) 
-		.mapToInt(Curso::getAlunos) //pega a quantidade de alunos
-		.sum();
+		cursos.stream()
+				.filter(c -> c.getAlunos() >= 50)
+				.collect(Collectors.toMap(
+						c -> c.getNome(), 
+						c -> c.getAlunos()))
+				.forEach((nome, alunos) -> System.out.println(nome + " tem " + alunos + " alunos."));
+
 		
-		System.out.println(sum);
+		cursos.stream()
+		   .filter(c -> c.getAlunos() > 50)
+		   .findFirst()
+		   .ifPresent(c -> System.out.println("O primeiro eh: " + c.getNome()));
+		
+		OptionalDouble mediaALuno = cursos.stream()
+	    .mapToInt(c -> c.getAlunos())
+	    .average();
+		System.out.println(mediaALuno);
+		
 	}
 }
