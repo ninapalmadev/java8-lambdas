@@ -3,7 +3,6 @@ package br.com.alura;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class OrdenaStrings {
 
@@ -26,7 +25,7 @@ public class OrdenaStrings {
 		
 		palavras.sort(Comparator.comparing(s -> s.length()));
 		palavras.sort(Comparator.comparing(String::length));
-		
+//		palavras.sort(comparing(String::length));		
 		System.out.println(palavras);
 
 //		for (String p : palavras) {
