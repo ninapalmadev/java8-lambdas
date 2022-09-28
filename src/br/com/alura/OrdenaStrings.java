@@ -15,37 +15,26 @@ public class OrdenaStrings {
 		palavras.add("hunters");
 
 		Comparator<String> comparador = new ComparadorPorTamanho();
-		//Collections.sort(palavras, comparador);
+		// Collections.sort(palavras, comparador);
 		palavras.sort(comparador);
 		System.out.println(palavras);
-		
+
 //		for (String p : palavras) {
 //			System.out.println(p);
 //		}
-		
-		Consumer<String> consumidor = new ImprimeNaLinha();
-		palavras.forEach(consumidor);
+
+		palavras.forEach(s -> System.out.println(s));
 	}
-}
-
-
-class ImprimeNaLinha implements Consumer<String>{
-
-	@Override
-	public void accept(String s) {
-		System.out.println(s);
-	}
-	
 }
 
 class ComparadorPorTamanho implements Comparator<String> {
 
 	@Override
 	public int compare(String s1, String s2) {
-		
-		if(s1.length() < s2.length())
+
+		if (s1.length() < s2.length())
 			return -1;
-		if(s1.length() > s2.length())
+		if (s1.length() > s2.length())
 			return 1;
 		return 0;
 	}
